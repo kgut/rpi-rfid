@@ -72,6 +72,7 @@ class RFIDReader:
             rfidPattern = re.compile(b'[\W_]+')
             while True:
                 buffer = buffer + ser.read(ser.inWaiting())
+                print buffer
                 if '\n' in buffer:
                     lines = buffer.split('\n')
                     last_received = lines[-2]
