@@ -68,25 +68,22 @@ class RFIDReader:
 #inspired from c code of http://www.seeedstudio.com/wiki/Grove_-_CO2_Sensor
     def read(self):
         try:
-        	buffer = ''
-        	rfidPattern = re.compile(b'[\W_]+')
-          	while True:
-          		buffer = buffer + ser.read(ser.inWaiting())
-          		if '\n' in buffer:
-        			lines = buffer.split('\n')
-        			last_received = lines[-2]
+            buffer = ''
+            rfidPattern = re.compile(b'[\W_]+')
+            while True:
+                buffer = buffer + ser.read(ser.inWaiting())
+                if '\n' in buffer:
+                    lines = buffer.split('\n')
+                    last_received = lines[-2]
                     print last_received
-        			match = rfidPattern.sub('', last_received)
+                    match = rfidPattern.sub('', last_received)
 
-        		if match:
-          			print match
-          		else:
-            	    print 'no card find'
-
-
-
+                if match:
+                    print match
+                else:
+                    print 'no card find'
         except IOError:
-                return '-1'
+            return '-1'
 
 ########################################################################################################
 #############   MAIN
