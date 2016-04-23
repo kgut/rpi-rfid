@@ -57,7 +57,7 @@ __author__ = 'Doms Genoud'
 #ser = serial.Serial('/dev/ttyUSB0',  9600, timeout = 1)	#Open the serial port at 9600 baud
 
 #To open the raspberry serial port
-ser = serial.Serial('/dev/ttyAMA0',  9600, timeout = 30)	#Open the serial port at 9600 baud
+ser = serial.Serial('/dev/ttyAMA0',  9600, timeout = 1)	#Open the serial port at 9600 baud
 
 #init serial
 ser.flush()
@@ -70,18 +70,19 @@ class RFIDReader:
         try:
             buffer = ''
             rfidPattern = re.compile(b'[\W_]+')
-            while True:
-                buffer = buffer + ser.read(ser.inWaiting())
-                if '\n' in buffer:
-                    lines = buffer.split('\n')
-                    last_received = lines[-2]
-                    print last_received
-                    match = rfidPattern.sub('', last_received)
+            # while True:
+            buffer = buffer + ser.read(10)
+            return buffer
+                # if '\n' in buffer:
+                    # lines = buffer.split('\n')
+                    # last_received = lines[-2]
+                    # print last_received
+                    # match = rfidPattern.sub('', last_received)
 
-                    if match:
-                        print match
-                    else:
-                        print 'no card find'
+                    # if match:
+                    #     print match
+                    # else:
+                    #     print 'no card find'
         except IOError:
             return '-1'
 
