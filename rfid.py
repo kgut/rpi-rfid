@@ -78,10 +78,10 @@ class RFIDReader:
                     print last_received
                     match = rfidPattern.sub('', last_received)
 
-                if match:
-                    print match
-                else:
-                    print 'no card find'
+                    if match:
+                        print match
+                    else:
+                        print 'no card find'
         except IOError:
             return '-1'
 
