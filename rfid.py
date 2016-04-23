@@ -75,6 +75,7 @@ class RFIDReader:
           		if '\n' in buffer:
         			lines = buffer.split('\n')
         			last_received = lines[-2]
+                    print last_received
         			match = rfidPattern.sub('', last_received)
 
         		if match:
